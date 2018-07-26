@@ -73,7 +73,7 @@
             <div class="up-container wow bounceIn" data-wow-delay="0.9s">
 
                 <!-- search file -->
-                <form id="search" action="" method="get">
+                <form id="search" action="{% url 'search' %}" method="get">
                     <div class="input-box">
                         <input id="files-info" name="kw" type="text" onkeydown="if(event.keyCode==13){return false;}" autocomplete="off" placeholder="Search File" />
                         <span class="iconfont search-text-icon">&#xe714;</span>
@@ -81,10 +81,10 @@
                 </form><!-- END search file -->
 
                 <!-- upload files -->
-                <form id="form" action="/" method="post" runat="server" enctype="multipart/form-data">
+                <form id="form" action="{% url 'upload' %}" method="post" runat="server" enctype="multipart/form-data">
                     <input id="files" name="file" multiple="multiple" style="display: none;" class="file-addr" type="file" />
                   {% csrf_token %}
-                    <input id="bt" type="button" value="Upload File" />
+                    <input id="bt" type="button" value="上传文件" />
                 </form><!-- END Upload file -->
 
 
@@ -93,11 +93,12 @@
             <!-- show_server_list -->
             <div class="show-file bounceIn">
                 <div class="file-title">
-                    <div class="file-name1" style="width:25%;">FileName</div>
-                    <div class="file-size" style="width:10%;">FileSize</div>
-                    <div class="file-size" style="width:10%;">Visits</div>
-                    <div class="file-date" style="width:20%;">FileDate</div>
-                    <div class="file-link" style="width:35%;">FileLink</div>
+                    <div class="file-name1" style="width:5%;" align="center">序号</div>
+                    <div class="file-name1" style="width:20%;">文件名</div>
+                    <div class="file-size" style="width:10%;">文件大小</div>
+                    <div class="file-size" style="width:10%;">访问人数</div>
+                    <div class="file-date" style="width:20%;">文件日期</div>
+                    <div class="file-link" style="width:35%;">文件链接</div>
                 </div>
                 {% block content %}
                 {% endblock %}
@@ -126,8 +127,8 @@
 
             <div class="col-xs-12">
                 <h1 class="wow fadeInUp" data-wow-delay="0.4s"><span>About</span> The Desc...</h1>
-                <p class="about-text wow slideInLeft">1. Upload the file size is not more than 5M</p>
-                <p class="about-text wow slideInLeft">2. Please properly keep network backup link</p>
+                <p class="about-text wow slideInLeft">1. 上传文件大小不要超过5M</p>
+                <p class="about-text wow slideInLeft">2. 请妥善保存网络备份链接</p>
             </div>
 
         </div><!-- /.row -->
