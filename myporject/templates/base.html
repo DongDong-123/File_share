@@ -1,4 +1,4 @@
-﻿
+
 <!doctype html>
 <html>
     <head>
@@ -17,6 +17,16 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://at.alicdn.com/t/font_xtmtjsdjlmc84cxr.css">
         <link rel="stylesheet" href="https://at.alicdn.com/t/font_k8psy17rqdoyldi.css">
+        <!-- 分页css样式设置 -->
+        <style type="text/css" media="screen">
+            #page_tag li{
+                float:left;
+                position: relative;
+                bottom: 0px;
+                left: 750px;
+                margin-left: 8px;
+                }
+        </style>
 </head>
 <body>
 
@@ -87,13 +97,12 @@
                     <input id="bt" type="button" value="上传文件" />
                 </form><!-- END Upload file -->
 
-
             </div>
 
             <!-- show_server_list -->
             <div class="show-file bounceIn">
                 <div class="file-title">
-                    <div class="file-name1" style="width:5%;" align="center">序号</div>
+                    <div class="file-id" style="width:5%;" align="center">序号</div>
                     <div class="file-name1" style="width:20%;">文件名</div>
                     <div class="file-size" style="width:10%;">文件大小</div>
                     <div class="file-size" style="width:10%;">访问人数</div>
@@ -103,23 +112,29 @@
                 {% block content %}
                 {% endblock %}
             </div>
-
+            
         </div>
-
+        <div class="am-u-lg-12 am-cf">
+            <div class="am-fr">
+                <ul class="am-pagination tpl-pagination" id="page_tag">
+                    {% load pagetag %}
+                    {% PageShow content.paginator.num_pages request %}
+                </ul>
+            </div>
+        </div>
     </div><!-- /.container -->
 </section>
 
-
-<section>
+<!-- <section>
     <div class="container">
         <div class="row">
 
             <div class="col-md-12 col-xs-12">
             </div>
 
-        </div><!-- /.row -->
-    </div>
-</section>
+        </div> -->    <!-- /.row -->
+   <!--  </div>
+</section> -->
 
 <section>
     <div class="container">
@@ -134,7 +149,6 @@
         </div><!-- /.row -->
     </div>
 </section>
-
 
 
     <!-- ThemePlug -->

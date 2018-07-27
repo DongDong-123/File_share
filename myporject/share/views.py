@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Upload
 from django.http import HttpResponsePermanentRedirect
+from django.core.paginator import Paginator
 import os
 import time
 import random
@@ -11,8 +12,15 @@ import json
 
 def index(request):
     ob = Upload.objects.all()
-    # return render(request, "index.html",{})
-    return render(request,'content.html',{"content":ob})
+    # 分页
+    paginator = Paginator(ob, 5)
+    p = int(request.GET.get('p', 1))
+    file_list = paginator.page(p)
+
+    context = {'content':file_list, 'p':p}
+
+    return render(request,'content.html',context)
+    # return render(request,'content.html',{"content":ob})
 
 
 def upload(request):
@@ -35,7 +43,6 @@ def upload(request):
 
 	up.save()
 
-
 	# return HttpResponse("upload")
 	return HttpResponsePermanentRedirect("/index/")
 
@@ -43,8 +50,9 @@ def upload(request):
 def search(request):
     # return HttpResponse('search')
     code = request.GET.get("kw")
-    print('code', code)
-    u = Upload.objects.filter(name=str(code))
+    # print('code', code)
+    # code = str(code)
+    u = Upload.objects.filter(name__contains=str(code))
     data = {}
     if u :
         for i in range(len(u)):
@@ -58,19 +66,7 @@ def search(request):
             data[i]['size'] = u[i].Filesize
             data[i]['time'] = str(u[i].Datatime.strftime('%Y-%m-%d %H:%M:%S'))
             data[i]['key'] = u[i].code
-            print(data)
+            # print(data)
     return HttpResponse(json.dumps(data),content_type="application/json")
 
 
-# def display(request, code):
-
-
-
-def upload_fuction(request):
-	myfile = request.FILES.get("img", None)
-	filename = str(time.time())+"."+myfile.name.split(".").pop()
-	up = open("./static/public/img/"+filename,"wb+")
-	for chunk in myfile.chunks():
-		up.write(chunk)
-	up.close()
-	return "/static/upload/img/"+filename

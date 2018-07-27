@@ -205,8 +205,8 @@ function showOverlay(info, buttt) {
 /* ------------------------------------------------------------------ */
 $('.search-text-icon').click(function() {
    
-    if( !$("#files-info").val() || $("#files-info").val().length < 4 ) {
-        $("#files-info").focus().val("").attr("placeholder","搜索内容不能为空或长度小于4个字符");
+    if( !$("#files-info").val() || $("#files-info").val().length < 2 ) {
+        $("#files-info").focus().val("").attr("placeholder","搜索内容不能为空或长度小于2个字符");
 	
     } else {
 
@@ -235,8 +235,9 @@ $('.search-text-icon').click(function() {
 	    for(var i=0; i<Length; i++) {
 		var html = 
 		'<div class="file-content">' +
-                    '<div class="file-name" style="width:25%;">'+data[i].filename+'</div>' +
-                    '<div class="file-size" style="width:10%;">'+data[i].size+'</div>' +
+                    '<div class="file-id" style="width:5%;" align="center">'+data[i].id+'</div>' +
+                    '<div class="file-name" style="width:20%;">'+data[i].filename+'</div>' +
+                    '<div class="file-size" style="width:10%;">'+data[i].size+'KB</div>' +
                     '<div class="file-date" style="width:10%;">'+data[i].download+'</div>' +
                     '<div class="file-date" style="width:20%;">'+data[i].time+'</div>' +
                     '<div class="file-link" style="width:35%; padding-right: 80px; text-overflow: ellipsis; overflow: hidden;">' +
@@ -244,7 +245,7 @@ $('.search-text-icon').click(function() {
                             'http://10.204.48.213:9999/s/'+data[i].key+
                         '</span>' +
                     '</div>' +
-                    '<button><a href="/s/'+data[i].key+'">Download</a></button>' +
+                    '<button><a href="/s/'+data[i].key+'">查看</a></button>' +
                 '</div>'
 		$('.show-file').append( html ).show();
 
